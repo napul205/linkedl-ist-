@@ -1,0 +1,85 @@
+#include <bits/stdc++.h>
+#include <iostream>
+using namespace std;
+class Node
+{
+    public:
+    int data;
+    Node* next;
+
+    public:
+    Node(int da)
+    {
+    //for creating the node with pointing to null
+        this->data=da;
+        this->next=NULL;
+    }
+};
+    void insertat(Node* &head,int da)
+    {
+    //to insert at head
+            Node* temp=new Node(da);
+            temp->next=head;
+            head=temp;
+    }
+
+    void printlist(Node* &head)
+    {
+        Node* temp=head;
+        while(temp!=NULL)
+        {
+            cout<<temp->data<<" "<<endl;
+            temp=temp->next;
+        }
+    }
+    
+    void insertlast(Node* &head,int da)
+    {
+        Node* temp=new Node(da);
+        head->next=temp;
+        head=head->next;
+        
+    }
+void insertatmid(Node* &head,Node* &tail,int da,int pos)
+{
+//for inserting at mid
+    if(pos==1)
+    {
+    //if the position is head
+        insertat(head,da);
+        return;
+    }
+    
+
+    int cnt=1;
+    Node* temp=head;
+    while(cnt<pos-1)
+    {
+        temp=temp->next;
+        cnt++;
+    }
+    if(temp->next==NULL)
+    {
+    //for inserting at end
+        insertlast(tail,da);
+        return;
+    }
+    Node* ne=new Node(da);
+    ne->next=temp->next;
+    temp->next=ne;
+}
+int main()
+{
+    Node* head=new Node(10);
+    
+    
+    Node* tail=head;
+    insertlast(tail,120);
+    insertlast(tail,20);
+    insertlast(tail,30);
+    insertlast(tail,400);
+    insertatmid(head,tail,50,3);
+    printlist(head);
+
+    return 0;
+}
